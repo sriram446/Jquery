@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+	<div>
+		balance : <input type="text" class="balaceClass"/><br/><br/>
+		estimated Amount : <input type="text" class="amountClass"/><br/><br/>
+		<span class="estimated">Estimated monthly Guarnatedd Income$<span class="replacement">0.00</span></span><br/><br/>
+		<a href="ajaxsample1.html">Advanced Dollar transfer</a>
+	</div>
+	Estimated monthly Guarnatedd Income $[object object]
+	
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script>
+		$(document).ready(function() {
+			$(".estimated").hide();			
+			var url="api/aja/slhl/cont";
+			$(".amountClass").on("change", function() {			
+			var balaceClassValue= $(".balaceClass").val(),
+				amountClassValue= $(".amountClass").val(),
+				dollarClassValue= $(".dollarClass").val(),
+				jsonvalue={"ammount":balaceClassValue, "dollar": amountClassValue},
+				jsonvalueDollar={"dollar":dollarClassValue};
+				$.ajax({
+					data: JSON.stringify(jsonvalue),
+					method: "POST",
+					dataType:"json",
+					url:url
+				}).done(function(data) {					
+					var formatted =JSON.parse(data);
+					if(formatted) {
+						$(".estimated").show();
+						$(".replacedynamicValue").text(formatted.amunt); 
+					}
+
+				});
+			});
+			if($(".amountClass").val() =="" ) {
+					$(".estimated").hide();
+				} else {
+					$(".estimated").show();
+				}
+		});
+
+		$(".dollarClass").on("change", function() {
+		var dollarClassValue= $(".dollarClass").val(),
+			jsonvalue={"dollar":dollarClassValue};
+			$.ajax({
+				data:JSON.stringify(jsonvalue),
+				method: "POST",
+				dataType="json",
+				url:"api/kdkddkk/contractnum&memebrdi"
+			}).done(function(data){
+				if(data){
+					$(".estimated").show();
+					$(".replacedynamicValue").text(data);
+				} else {
+					$(".estimated").hide();
+				}
+
+			});
+			
+		if($(".dollarClass").val() =="" ) {
+			$(".estimated").hide();
+		}
+
+		});
+
+
+</script>
+</body>
+</html>

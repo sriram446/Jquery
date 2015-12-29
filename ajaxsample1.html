@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+	<div> 
+		amountin dollar:<input type="text" class="dollarClass" /><br/>
+		<span class="estimated" >Estimated monthly Guarnatedd Income$<span class="replacedynamicValue">0.00</span></span>
+	</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script>
+		
+		$(".dollarClass").on("change", function() {
+		var dollarClassValue= $(".dollarClass").val(),
+			jsonvalue={"dollar":dollarClassValue};
+			$.ajax({
+				data:JSON.stringify(jsonvalue),
+				method: "POST",
+				dataType="json",
+				url:""
+			}).done(function(data){
+				if(data){
+					$(".estimated").show();
+					$(".replacedynamicValue").text(data);
+				} else {
+					$(".estimated").hide();
+				}
+
+			});
+			
+		if($(".dollarClass").val() =="" ) {
+			$(".estimated").hide();
+		}
+
+		});
+
+
+</script>
+</body>
+</html>
